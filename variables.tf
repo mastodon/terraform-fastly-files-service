@@ -1,3 +1,9 @@
+variable "name" {
+  description = "Name of the fastly service (defaults to hostname)."
+  type        = string
+  default     = ""
+}
+
 variable "hostname" {
   description = "Hostname the service points to."
   type        = string
@@ -6,6 +12,12 @@ variable "hostname" {
 variable "app_hostname" {
   description = "Hostname of the mastodon app that this service belongs to."
   type        = string
+}
+
+variable "ssl_hostname" {
+  description = "Hostname to use for SSL verification (if different from 'hostname')."
+  type        = string
+  default     = ""
 }
 
 variable "backend_name" {

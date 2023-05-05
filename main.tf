@@ -1,5 +1,8 @@
 locals {
+  name = var.name != "" ? var.name : var.hostname
+
   backend_name = var.backend_name != "" ? var.backend_name : "${var.hostname} - backend"
+  ssl_hostname = var.ssl_hostname != "" ? var.ssl_hostname : var.hostname
 
   vcl_exoscale_forward        = templatefile("${path.module}/vcl/exoscale_forward.vcl", { hostname = replace(var.app_hostname, ".", "-") })
   vcl_remove_cookies_headers  = file("${path.module}/vcl/remove_cookies_headers.vcl")
@@ -8,7 +11,7 @@ locals {
 }
 
 resource "fastly_service_vcl" "files_service" {
-  name = var.hostname
+  name = local.name
 
   http3          = true
   stale_if_error = true
@@ -22,11 +25,11 @@ resource "fastly_service_vcl" "files_service" {
     address = var.backend_address
 
     keepalive_time    = 0
-    override_host     = var.backend_address
+    override_host     = local.ssl_hostname
     port              = 443
     shield            = var.shield_region
-    ssl_cert_hostname = var.backend_address
-    ssl_sni_hostname  = var.backend_address
+    ssl_cert_hostname = local.ssl_hostname
+    ssl_sni_hostname  = local.ssl_hostname
     use_ssl           = true
   }
 
