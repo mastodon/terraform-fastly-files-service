@@ -35,3 +35,15 @@ variable "shield_region" {
   description = "Which Fastly shield region to use. Should correspond with the shield code."
   type        = string
 }
+
+variable "force_tls_hsts" {
+  description = "Force TLS and HTTP Strict Transport Security (HSTS) to ensure that every request is secure."
+  type        = bool
+  default     = true
+}
+
+variable "hsts_duration" {
+  description = "Number of seconds for the client to remember only to use HTTPS."
+  type        = number
+  default     = 31557600
+}
