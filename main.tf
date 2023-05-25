@@ -28,7 +28,8 @@ resource "fastly_service_vcl" "files_service" {
     override_host     = local.ssl_hostname
     port              = 443
     shield            = var.shield_region
-    ssl_cert_hostname = local.ssl_hostname
+    ssl_check_cert    = var.backend_ssl_check
+    ssl_cert_hostname = var.backend_ssl_check ? local.ssl_hostname : ""
     ssl_sni_hostname  = local.ssl_hostname
     use_ssl           = true
   }

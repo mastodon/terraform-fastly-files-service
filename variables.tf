@@ -31,6 +31,12 @@ variable "backend_address" {
   type        = string
 }
 
+variable "backend_ssl_check" {
+  description = "Be strict about checking SSL certs when connecting to the backend."
+  type        = bool
+  default     = true
+}
+
 variable "shield_region" {
   description = "Which Fastly shield region to use. Should correspond with the shield code."
   type        = string
