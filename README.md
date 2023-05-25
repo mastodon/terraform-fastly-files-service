@@ -32,6 +32,7 @@ No modules.
 | <a name="input_app_hostname"></a> [app\_hostname](#input\_app\_hostname) | Hostname of the mastodon app that this service belongs to. | `string` | n/a | yes |
 | <a name="input_backend_address"></a> [backend\_address](#input\_backend\_address) | Address to use for connecting to the backend. Can be a hostname or an IP address. | `string` | n/a | yes |
 | <a name="input_backend_name"></a> [backend\_name](#input\_backend\_name) | Optional name for the backend. | `string` | `""` | no |
+| <a name="input_backend_ssl_check"></a> [backend\_ssl\_check](#input\_backend\_ssl\_check) | Be strict about checking SSL certs when connecting to the backend. | `bool` | `true` | no |
 | <a name="input_force_tls_hsts"></a> [force\_tls\_hsts](#input\_force\_tls\_hsts) | Force TLS and HTTP Strict Transport Security (HSTS) to ensure that every request is secure. | `bool` | `true` | no |
 | <a name="input_hostname"></a> [hostname](#input\_hostname) | Hostname the service points to. | `string` | n/a | yes |
 | <a name="input_hsts_duration"></a> [hsts\_duration](#input\_hsts\_duration) | Number of seconds for the client to remember only to use HTTPS. | `number` | `31557600` | no |
