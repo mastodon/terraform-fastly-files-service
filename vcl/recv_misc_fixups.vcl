@@ -15,4 +15,5 @@ if (req.url.ext ~ "(?i)^(jpe?g|png|gif|mp4|mp3|gz|svg|avif|webp)$") {
 
 # Remove all headers we don't care to be passing around. It does not remove protected headers. More details
 # https://developer.fastly.com/reference/vcl/functions/headers/header-filter-except/
-header.filter_except(req, "Accept-Encoding");
+# This causes a 301, need to investigate why first.
+#header.filter_except(req, "Accept-Encoding");
