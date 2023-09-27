@@ -54,6 +54,30 @@ resource "fastly_service_vcl" "files_service" {
     source            = "\"1\""
   }
 
+  # Additional headers for content security & nosniff
+
+  header {
+    name     = "Content security policy"
+    action   = "set"
+    type     = "request"
+    priority = 10
+
+    destination = "http.Content-Security-Policy"
+    source      = "\"default-src 'none'; form-action 'none'\""
+  }
+
+  header {
+    name     = "Nosniff"
+    action   = "set"
+    type     = "request"
+    priority = 10
+
+    destination = "http.X-Content-Type-Options"
+    source      = "\"nosniff\""
+  }
+
+
+
   # Force TLS/HSTS settings
   # Creates similar objects to what the GUI switch creates.
 
