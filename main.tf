@@ -8,6 +8,7 @@ locals {
   vcl_recv_various_fixups     = file("${path.module}/vcl/recv_misc_fixups.vcl")
   vcl_remove_response_headers = file("${path.module}/vcl/remove_response_headers.vcl")
   vcl_segmented_caching       = file("${path.module}/vcl/segmented_caching.vcl")
+  vcl_cors_headers            = file("${path.module}/vcl/add_cors_headers.vcl")
 }
 
 resource "fastly_service_vcl" "files_service" {
@@ -136,6 +137,13 @@ resource "fastly_service_vcl" "files_service" {
     name     = "Remove headers from origin response"
     content  = local.vcl_remove_response_headers
     type     = "fetch"
+    priority = 100
+  }
+
+  snippet {
+    name     = "Add CORS headers if necessary"
+    content  = local.vcl_cors_headers
+    type     = "deliver"
     priority = 100
   }
 
