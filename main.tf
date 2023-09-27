@@ -5,7 +5,7 @@ locals {
   ssl_hostname = var.ssl_hostname != "" ? var.ssl_hostname : var.hostname
 
   vcl_exoscale_forward        = templatefile("${path.module}/vcl/exoscale_forward.vcl", { hostname = replace(var.app_hostname, ".", "-") })
-  vcl_remove_cookies_headers  = file("${path.module}/vcl/remove_cookies_headers.vcl")
+  vcl_recv_various_fixups     = file("${path.module}/vcl/recv_misc_fixups.vcl")
   vcl_remove_response_headers = file("${path.module}/vcl/remove_response_headers.vcl")
   vcl_segmented_caching       = file("${path.module}/vcl/segmented_caching.vcl")
 }
@@ -119,8 +119,8 @@ resource "fastly_service_vcl" "files_service" {
   }
 
   snippet {
-    name     = "Remove cookies and headers from request"
-    content  = local.vcl_remove_cookies_headers
+    name     = "Recv Various Fixups"
+    content  = local.vcl_recv_various_fixups
     type     = "recv"
     priority = 100
   }
