@@ -149,10 +149,10 @@ resource "fastly_service_vcl" "files_service" {
 
   # Additional products
   product_enablement {
-    brotli_compression = false
-    domain_inspector   = false
-    image_optimizer    = false
-    origin_inspector   = false
-    websockets         = false
+    brotli_compression = var.product_enablement.brotli_compression
+    domain_inspector   = var.product_enablement.domain_inspector
+    image_optimizer    = var.product_enablement.image_optimizer
+    origin_inspector   = var.product_enablement.origin_inspector
+    websockets         = var.product_enablement.websockets
   }
 }
