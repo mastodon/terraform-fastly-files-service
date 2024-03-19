@@ -7,13 +7,13 @@ Terraform module for creating a service in Fastly for directing traffic towards 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_fastly"></a> [fastly](#requirement\_fastly) | >= 4.1.0 |
+| <a name="requirement_fastly"></a> [fastly](#requirement\_fastly) | >= 5.7.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_fastly"></a> [fastly](#provider\_fastly) | >= 4.1.0 |
+| <a name="provider_fastly"></a> [fastly](#provider\_fastly) | >= 5.7.1 |
 
 ## Modules
 
@@ -37,6 +37,7 @@ No modules.
 | <a name="input_hostname"></a> [hostname](#input\_hostname) | Hostname the service points to. | `string` | n/a | yes |
 | <a name="input_hsts_duration"></a> [hsts\_duration](#input\_hsts\_duration) | Number of seconds for the client to remember only to use HTTPS. | `number` | `31557600` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the fastly service (defaults to hostname). | `string` | `""` | no |
+| <a name="input_product_enablement"></a> [product\_enablement](#input\_product\_enablement) | Which additional Fastly products to enable for this service. | <pre>object({<br>    brotli_compression = optional(bool, false)<br>    domain_inspector   = optional(bool, false)<br>    image_optimizer    = optional(bool, false)<br>    origin_inspector   = optional(bool, false)<br>    websockets         = optional(bool, false)<br>  })</pre> | <pre>{<br>  "brotli_compression": false,<br>  "domain_inspector": false,<br>  "image_optimizer": false,<br>  "origin_inspector": false,<br>  "websockets": false<br>}</pre> | no |
 | <a name="input_shield_region"></a> [shield\_region](#input\_shield\_region) | Which Fastly shield region to use. Should correspond with the shield code. | `string` | n/a | yes |
 | <a name="input_ssl_hostname"></a> [ssl\_hostname](#input\_ssl\_hostname) | Hostname to use for SSL verification (if different from 'hostname'). | `string` | `""` | no |
 
