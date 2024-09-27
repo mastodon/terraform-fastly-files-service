@@ -4,6 +4,8 @@ locals {
   backend_name = var.backend_name != "" ? var.backend_name : "${var.hostname} - backend"
   ssl_hostname = var.ssl_hostname != "" ? var.ssl_hostname : var.hostname
 
+
+  datadog_format              = replace(file("${path.module}/logging/datadog.json"), "__service__", var.datadog_service)
   vcl_exoscale_forward        = templatefile("${path.module}/vcl/exoscale_forward.vcl", { hostname = replace(var.app_hostname, ".", "-") })
   vcl_recv_various_fixups     = file("${path.module}/vcl/recv_misc_fixups.vcl")
   vcl_remove_response_headers = file("${path.module}/vcl/remove_response_headers.vcl")
@@ -33,6 +35,18 @@ resource "fastly_service_vcl" "files_service" {
     ssl_cert_hostname = var.backend_ssl_check ? local.ssl_hostname : ""
     ssl_sni_hostname  = local.ssl_hostname
     use_ssl           = true
+  }
+
+  # Datadog logging
+  dynamic "logging_datadog" {
+    for_each = var.datadog ? [1] : []
+    content {
+      name   = "Datadog ${var.datadog_region}"
+      format = local.datadog_format
+      token  = var.datadog_token
+
+      region = var.datadog_region
+    }
   }
 
   # Set custom Fastly purge rules
