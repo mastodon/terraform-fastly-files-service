@@ -24,6 +24,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [fastly_service_vcl.files_service](https://registry.terraform.io/providers/fastly/fastly/latest/docs/resources/service_vcl) | resource |
+| [fastly_tls_subscription.tls](https://registry.terraform.io/providers/fastly/fastly/latest/docs/resources/tls_subscription) | resource |
 
 ## Inputs
 
@@ -44,6 +45,9 @@ No modules.
 | <a name="input_product_enablement"></a> [product\_enablement](#input\_product\_enablement) | Which additional Fastly products to enable for this service. | <pre>object({<br>    brotli_compression = optional(bool, false)<br>    domain_inspector   = optional(bool, false)<br>    image_optimizer    = optional(bool, false)<br>    origin_inspector   = optional(bool, false)<br>    websockets         = optional(bool, false)<br>  })</pre> | <pre>{<br>  "brotli_compression": false,<br>  "domain_inspector": false,<br>  "image_optimizer": false,<br>  "origin_inspector": false,<br>  "websockets": false<br>}</pre> | no |
 | <a name="input_shield_region"></a> [shield\_region](#input\_shield\_region) | Which Fastly shield region to use. Should correspond with the shield code. | `string` | n/a | yes |
 | <a name="input_ssl_hostname"></a> [ssl\_hostname](#input\_ssl\_hostname) | Hostname to use for SSL verification (if different from 'hostname'). | `string` | `""` | no |
+| <a name="input_tls_authority"></a> [tls\_authority](#input\_tls\_authority) | Which certificate authority to use for the certificates | `string` | `"certainly"` | no |
+| <a name="input_tls_domains"></a> [tls\_domains](#input\_tls\_domains) | Custom domains to use for a TLS subscription. Defaults to a combination of 'hostname' and 'domains' | `list(string)` | `[]` | no |
+| <a name="input_tls_enable"></a> [tls\_enable](#input\_tls\_enable) | Whether to create a TLS subscription in Fastly for the domain(s) | `bool` | `false` | no |
 
 ## Outputs
 
