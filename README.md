@@ -34,6 +34,7 @@ No modules.
 | <a name="input_backend_address"></a> [backend\_address](#input\_backend\_address) | Address to use for connecting to the backend. Can be a hostname or an IP address. | `string` | n/a | yes |
 | <a name="input_backend_name"></a> [backend\_name](#input\_backend\_name) | Optional name for the backend. | `string` | `""` | no |
 | <a name="input_backend_ssl_check"></a> [backend\_ssl\_check](#input\_backend\_ssl\_check) | Be strict about checking SSL certs when connecting to the backend. | `bool` | `true` | no |
+| <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | Name of the exoscale bucket this service will point to. Default is 'app\_hostname' with dashes instead of periods. | `string` | `""` | no |
 | <a name="input_datadog"></a> [datadog](#input\_datadog) | Whether to send logging info to Datadog | `bool` | `false` | no |
 | <a name="input_datadog_region"></a> [datadog\_region](#input\_datadog\_region) | The region that log data will be sent to. | `string` | `"EU"` | no |
 | <a name="input_datadog_service"></a> [datadog\_service](#input\_datadog\_service) | Datadog service name to use for logs | `string` | `"fastly"` | no |
