@@ -37,6 +37,12 @@ variable "backend_ssl_check" {
   default     = true
 }
 
+variable "bucket_name" {
+  description = "Name of the exoscale bucket this service will point to. Default is 'app_hostname' with dashes instead of periods."
+  type        = string
+  default     = ""
+}
+
 variable "shield_region" {
   description = "Which Fastly shield region to use. Should correspond with the shield code."
   type        = string
