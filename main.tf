@@ -12,6 +12,8 @@ locals {
   vcl_segmented_caching       = file("${path.module}/vcl/segmented_caching.vcl")
   vcl_cors_headers            = file("${path.module}/vcl/add_cors_headers.vcl")
   vcl_purge_auth              = file("${path.module}/vcl/purge_auth.vcl")
+
+  tls_domains = length(var.tls_domains) >= 1 ? var.tls_domains : [var.hostname]
 }
 
 resource "fastly_service_vcl" "files_service" {
@@ -177,4 +179,12 @@ resource "fastly_service_vcl" "files_service" {
     origin_inspector   = var.product_enablement.origin_inspector
     websockets         = var.product_enablement.websockets
   }
+}
+
+# TLS
+resource "fastly_tls_subscription" "tls" {
+  count = var.tls_enable ? 1 : 0
+
+  domains               = local.tls_domains
+  certificate_authority = "certainly"
 }

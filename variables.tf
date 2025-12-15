@@ -101,3 +101,28 @@ variable "datadog_region" {
     error_message = "Datadog region must be either US or EU."
   }
 }
+
+# TLS
+
+variable "tls_enable" {
+  description = "Whether to create a TLS subscription in Fastly for the domain(s)"
+  type        = bool
+  default     = false
+}
+
+variable "tls_domains" {
+  description = "Custom domains to use for a TLS subscription. Defaults to a combination of 'hostname' and 'domains'"
+  type        = list(string)
+  default     = []
+}
+
+variable "tls_authority" {
+  description = "Which certificate authority to use for the certificates"
+  type        = string
+  default     = "certainly"
+
+  validation {
+    condition     = contains(["lets-encrypt", "globalsign", "certainly"], var.tls_authority)
+    error_message = "Must be one of: lets-encrypt, globalsign or certainly"
+  }
+}
