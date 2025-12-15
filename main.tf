@@ -4,7 +4,7 @@ locals {
   backend_name = var.backend_name != "" ? var.backend_name : "${var.hostname} - backend"
   ssl_hostname = var.ssl_hostname != "" ? var.ssl_hostname : var.hostname
 
-  exoscale_bucket = var.bucket_name ? var.bucket_name : replace(var.app_hostname, ".", "-")
+  exoscale_bucket = var.bucket_name != "" ? var.bucket_name : replace(var.app_hostname, ".", "-")
 
   datadog_format              = replace(file("${path.module}/logging/datadog.json"), "__service__", var.datadog_service)
   vcl_exoscale_forward        = templatefile("${path.module}/vcl/exoscale_forward.vcl", { hostname = local.exoscale_bucket })
